@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">로그인 </h1>
+
+
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="로그인" />
+</form>
+<hr>
+    <h6> 일부브라우저(크롬 등) 사용자의 경우 로그아웃하지 않고 브라우저 종료시, 로그인이 유지됩니다. 정보보호를 위하여 로그아웃을 생활화해주세요. </h6>
+<hr>
+<a href="{% url 'signup' %}"> <p> 회원가입하기 </p> </a>
+</div>
+{% endblock %}

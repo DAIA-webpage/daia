@@ -1,0 +1,121 @@
+<!-- Copyright 2013-2018 Blackrock Digital LLC. Code released under the MIT license.-->
+<!-- https://startbootstrap.com/template-overviews/modern-business/ -->
+<!-- https://github.com/BlackrockDigital/startbootstrap-modern-business -->
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <style>
+  #recruit_style{
+  border: 5px solid black;
+  color: black;
+    text-align: center;}
+</style>
+
+
+  <title>DAIA</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href={% static "vendor/bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href={% static "css/modern-business.css" %} rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">DAIA</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        {% if check %}
+        <a class="nav-link" href="{% url 'administrator' %}"> 관리자 페이지 </p> </a>
+        <a class="nav-link" href="{% url 'info' %}"> 정보 변경 </p> </a>
+        {% endif %}
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            About
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+            <a class="dropdown-item" href="{% url 'about' %}">About Us</a>
+            <a class="dropdown-item" href="{% url 'members' %}" >Members</a>
+            <a class="dropdown-item" href="{% url 'rules' %}">Rules</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'news' %}">News</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Activity
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+            <a class="dropdown-item" href="{% url 'project' %}">Project</a>
+            <a class="dropdown-item" href="{% url 'seminar' %}">Seminar</a>
+            <a class="dropdown-item" href="{% url 'album' %}">Album</a>
+            <a class="dropdown-item" href="{% url 'notice' %}">Notice</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            SNS
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+            <a class="dropdown-item" href="https://www.facebook.com/groups/176821646250632/" target="_blank">Facebook</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'recruit' %}">Recruit</a>
+        </li>
+
+        <li class="nav-item">
+        {% if check %}
+        <a class="nav-link" href="{% url 'logout' %}"> logout </p> </a>
+        {% else %}
+        <a class="nav-link" href="{% url 'login' %}"> login </p> </a>
+        {% endif %}
+         </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; DAIA_HanSeonung</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src={% static "vendor/jquery/jquery.min.js" %}></script>
+    <script src={% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+
+
+</body>
+
+</html>

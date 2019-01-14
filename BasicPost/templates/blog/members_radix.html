@@ -1,0 +1,112 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+
+<!-- Page Content -->
+<div class="container">
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">Members </h1>
+<div class="container">
+  <!--Tab-->
+
+  <div class="row">
+
+    <div class="col-lg-12 mt-4 mb-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'members' %}">전체</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if radix == '1' %} active {% endif %}" href="{% url 'members_radix' radix=1 %}">1기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if radix == '2' %} active {% endif %}" href="{% url 'members_radix' radix=2 %}">2기</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Team Members Row -->
+  <div class="row">
+    {% for member in members_radix %}
+    <div class="col-lg-4 col-sm-6 text-center mb-3 mt-3">
+      {% if member.image %}
+      <img class="rounded-circle img-fluid d-block mx-auto" src="{{member.image.url}}" alt="">
+      {% else %}
+      <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/150x150" alt="">
+       {% endif %}
+      <h3 class="mt-3">
+        <a href='#exampleModal{{member.student_id}}' data-toggle='modal'>
+          {{member.name|linebreaksbr}}
+        </a>
+        <p>{{member.position|linebreaksbr}}</p>
+      </h3>
+      <p>{{member.email|linebreaksbr}}</p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{member.student_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {% if member.image %}
+            <img class="rounded-circle img-fluid d-block mx-auto mb-4" src="{{member.image.url}}" alt="">
+            {% else %}
+            <img class="rounded-circle img-fluid d-block mx-auto mb-4" src="http://placehold.it/150x150" alt="">
+             {% endif %}
+            <h2>
+              <p class="text-center">{{member.name|linebreaksbr}}</p>
+            </h2>
+
+            <dl class="row">
+
+              <dt class="col-sm-3">Major</dt>
+              <dd class="col-sm-9">{{member.major|linebreaksbr}}</dd>
+
+              <dt class="col-sm-3">Position</dt>
+              <dd class="col-sm-9">{{member.position|linebreaksbr}}</dd>
+
+              <dt class="col-sm-3">Github</dt>
+              <dd class="col-sm-9">{{member.github|linebreaksbr}}</dd>
+              
+              <dt class="col-sm-3">기수정보</dt>
+              <dd class="col-sm-9">{{member.class_field|linebreaksbr}}</dd>
+
+              <dt class="col-sm-3">Contact</dt>
+              <dd class="col-sm-9">
+                <dl class="row">
+                  <dt class="col-sm-4">E-mail</dt>
+                  <dd class="col-sm-8">{{member.e_mail|linebreaksbr}}</dd>
+                  <dt class="col-sm-4">Cell Phone</dt>
+                  <dd class="col-sm-8">{{member.phone|linebreaksbr}}</dd>
+                </dl>
+              </dd>
+              <dt class="col-sm-3">Introduction</dt>
+              <dd class="col-sm-9">{{member.introduction|linebreaksbr}}</dd>
+            </dl>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+</div>
+
+<!-- /.container -->
+{% endblock %}

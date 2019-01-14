@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="col mt-4 mb-3"> 관리자 </h1>
+
+        <ul>
+            applying list
+
+                {% for userRequest in latest_UserRequest_list %}
+                    <li>
+
+                        <form action="{% url 'okay' userRequest.student_id %}" method="post">
+                            {% csrf_token %}
+                            이름 : {{userRequest.name}}
+                            / 학과 : {{userRequest.major}}
+                            <input type="submit" name= "btn1" value="승인">
+                            <input type="submit" name = "btn2"  value="거절">
+
+
+                        </form>
+
+                    </li>
+                {% endfor %}
+            <hr>
+                member list
+
+                {% for user in latest_User_list %}
+                 {% ifnotequal user.name "admin" %}
+                    <li>
+                       <form action="{% url 'detail' user.student_id %}"  method="post">
+                           {% csrf_token %}
+                           {{user.name}}
+                            <input type="submit" value="정보 수정">
+                       </form>
+                     </li>
+                 {% endifnotequal %}
+                {% endfor %}
+                
+            <hr>
+                
+            <a href="{% url 'mainImage_edit' %}"> <p> 사진등록 </p> </a>
+
+
+        </ul>
+
+  </div>
+{% endblock %}

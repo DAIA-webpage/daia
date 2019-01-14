@@ -1,0 +1,84 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+
+  <!-- Page Heading/Breadcrumbs -->
+  <div class="row">
+    <h1 class="col mt-4 mb-3">Album
+    </h1>
+
+    <div class="col mt-4 mb-4 input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Go!</button>
+          </span>
+    </div>
+  </div>
+
+  {% if check %}
+  <a href="{% url 'album_new' %}"> <p> 글쓰기 </p> </a>
+  {% endif %}
+
+  <div class="row">
+    {% for gallary in gallaries %}
+
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+<div class="card h-100">
+          {% if gallary.images_set.all %}
+  <!-- https://stackoverflow.com/questions/6507817/how-to-break-for-loop-in-django-template 능력자 형님 감사합니다 ㅠㅜ-->
+             {% for p in gallary.images_set.all|slice:":1" %}
+             <a href="{% url 'album_detail' pk=gallary.pk %}"><img class="card-img-top" src="{{ p.image.url }}" alt=""></a>
+             {% endfor %}
+        {% else %}
+        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+        {% endif %}
+
+
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="{% url 'album_detail' pk=gallary.pk %}"> {{ gallary.title }} </a>
+
+          </h4>
+          <p>{{gallary.origin_date}}에 게시</p>
+          <p>작성자 : {{gallary.writer_name}}</p>
+          <p class="card-text">
+            {% if gallary.content|length > 65%}
+            {{ gallary.content|slice:"0:65"|add:"  ..."}}
+            {% else %}
+            {{ gallary.content }}
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  {% if gallaries.has_other_pages %}
+  <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+
+    {% if gallaries.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+
+    {% for i in gallaries.paginator.page_range %}
+    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %}
+
+    {% if gallaries.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  {% endif %}
+
+</div>
+{% endblock %}

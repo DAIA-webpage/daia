@@ -1,0 +1,96 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+
+          <div class="carousel-inner" role="listbox">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+            {% if main.image1 %}
+            <div class="carousel-item active" style="background-image: url('{{ main.image1.url }}')">
+            {% else %}
+            <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+            {% endif %}
+            <div class="carousel-caption d-none d-md-block">
+              <h3>DAIA</h3>
+              <p>Dongguk Artificial Inteligence Association</p>
+            </div>
+          </div>
+
+          <!-- Slide Two - Set the background image for this slide in the line below -->
+            {% if main.image2 %}
+            <div class="carousel-item" style="background-image: url('{{ main.image2.url }}')">
+            {% else %}
+            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+            {% endif %}
+            <div class="carousel-caption d-none d-md-block">
+              <h3>4 parts seminar </h3>
+              <p>Vision Recognition, Launguage, Generative Model, Reinforcement Learning </p>
+            </div>
+          </div>
+        </div>
+
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+      <br>
+
+      <!-- Marketing Icons Section -->
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card h-80">
+            <h4 class="card-header">News</h4>
+            <div class="card-body">
+              {% for news in news|slice:":4" %}
+                  <a href="{% url 'news_detail' pk=news.pk %}" class="card-text"> {{ news.title }} </a>
+                  <hr>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card h-80">
+            <h4 class="card-header">Project</h4>
+            <div class="card-body">
+              {% for project in projects|slice:":4" %}
+                  <a href="{% url 'project_detail' pk=project.pk %}" class="card-text"> {{ project.title }} </a>
+                  <hr>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card h-80">
+            <h4 class="card-header">Seminar</h4>
+            <div class="card-body">
+              {% for seminar in seminars|slice:":4" %}
+                  <a href="{% url 'seminar_detail' pk=seminar.pk %}" class="card-text"> {{ seminar.title }} </a>
+                  <hr>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    
+{% endblock %}

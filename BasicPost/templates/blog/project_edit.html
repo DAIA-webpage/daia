@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">New project </h1>
+ <br>
+<form
+    method="POST"
+    action=""
+    enctype="multipart/form-data"
+>
+    {% csrf_token %}
+    {{ form.as_p }}
+     <br>
+     <h5> process에 체크를 안하면 진행중, 체크하면 완료입니다. </h5>
+     <br>
+     <h10> 첨부파일 이름을 영어로 바꾼후 업로드해주세요.</h10>
+     <br>
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+{% endblock %}

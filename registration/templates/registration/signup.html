@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container">
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">회원가입 </h1>
+    <h10> * 비밀번호 확인 기능을 아직 만들지 않아 가입과정에서 비밀번호 마스킹이 안되게 해두었습니다. * </h10>
+    <br>
+    <h10> ** 비밀번호 확인 기능을 만들고 마스킹 기능도 구현해두겠습니다 **</h10>
+    <br><br><br>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="회원가입" />
+</form>
+</div>
+{% endblock %}

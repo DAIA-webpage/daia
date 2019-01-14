@@ -1,0 +1,28 @@
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="col mt-4 mb-3"> 프로필 </h1>
+
+
+<form action="{% url 'modify' user.student_id %}"  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+<hr>
+    auth_code : 1이면 일반회원, 0이면 관리자입니다.
+<hr>
+    <input type="submit" name= "btn1" value="수정" />
+    <input type="submit" name= "btn2" value="삭제" />
+</form>
+
+  </div>
+{% endblock %}
+<!--{%comment%}-->
+<!--<form action="{% url 'polls:index' %}"  method="post">-->
+    <!--{% csrf_token %}-->
+    <!--{{ form }}-->
+
+    <!--<input type="submit" value="수정" />-->
+<!--</form>-->
+<!--{%endcomment%}-->
